@@ -13,6 +13,7 @@ import { defineConfig, devices } from "@playwright/test";
 const config = defineConfig({
   testDir: "./tests",
   testMatch: "tests/**/*.spec.js",
+  testIgnore: ["tests/example.spec.js", "tests-examples/**/*.spec.js"],
   /* Timeout for every tests */
   timeout: 30000,
   /* Expect assertion */
@@ -33,9 +34,16 @@ const config = defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: "https://qauto.forstudy.space/",
-
+    headless: false,
+    httpCredentials: {
+      username: "guest",
+      password: "welcome2qauto",
+    },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    launchOptions: {
+      slowMo: 1000,
+    },
   },
 
   /* Configure projects for major browsers */
@@ -45,10 +53,10 @@ const config = defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
 
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    },
+    // {
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
+    // },
 
     /* Test against mobile viewports. */
     // {
