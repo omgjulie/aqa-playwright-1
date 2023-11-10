@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Registration", async () => {
-  test.skip("All fields are mandatory", async ({ page }) => {
+  test("All fields are mandatory", async ({ page }) => {
     const nameInput = page.locator("input#signupName");
     const lastNameInput = page.locator("input#signupLastName");
     const emailInput = page.locator("input#signupEmail");
@@ -55,7 +55,7 @@ test.describe("Registration", async () => {
     await expect(registerButton).toBeDisabled();
   });
 
-  test.skip("Input validation", async ({ page }) => {
+  test("Input validation", async ({ page }) => {
     const nameInput = page.locator("input#signupName");
     const lastNameInput = page.locator("input#signupLastName");
     const emailInput = page.locator("input#signupEmail");

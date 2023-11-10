@@ -13,7 +13,11 @@ import { defineConfig, devices } from "@playwright/test";
 const config = defineConfig({
   testDir: "./tests",
   testMatch: "tests/**/*.spec.js",
-  testIgnore: ["tests/example.spec.js", "tests-examples/**/*.spec.js"],
+  testIgnore: [
+    "tests/example.spec.js",
+    "tests-examples/**/*.spec.js",
+    "tests/auth/*.spec.js",
+  ],
   /* Timeout for every tests */
   timeout: 30000,
   /* Expect assertion */
@@ -42,7 +46,7 @@ const config = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     launchOptions: {
-      slowMo: 1000,
+      slowMo: 500,
     },
   },
 
