@@ -23,7 +23,9 @@ test.describe("Sign up modal", () => {
   test("All fields are mandatory", async () => {
     const registration = new RegistrationPage(page);
 
-    await registration.clickAllMandatoryInputs();
+    const emptyData = ["", "", "", "", ""];
+
+    await registration.fill(emptyData);
 
     const expectedErrorText = [
       "Name required",
@@ -37,22 +39,18 @@ test.describe("Sign up modal", () => {
     await expect(errorMessageText).toEqual(expectedErrorText);
 
     for (const inputItem of await registration.signUpInput.all()) {
-      await registration.checkCSS(
-        inputItem,
-        "border-color",
-        "rgb(220, 53, 69)",
-      );
+      await expect(inputItem).toHaveCSS("border-color", "rgb(220, 53, 69)");
     }
 
     await expect(registration.registerButton).toBeDisabled();
   });
 
-  test("Validation of inputs", async () => {
+  test.only("Validation of inputs", async () => {
     const registration = new RegistrationPage(page);
 
     const invalidData = ["6", "6", "etdf@f", "4", "6", "7"];
 
-    await registration.fillTextAllInputs(invalidData);
+    await registration.fill(invalidData);
 
     const expectedErrorText = [
       "Name is invalid",
@@ -80,7 +78,7 @@ test.describe("Sign up modal", () => {
 
     const validData = [firsName, lastName, email, password, password];
 
-    await registration.fillTextAllInputs(validData);
+    await registration.fill(validData);
 
     await expect(registration.registerButton).toBeEnabled();
     await registration.registerButton.click();

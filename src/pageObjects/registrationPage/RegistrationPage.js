@@ -29,22 +29,10 @@ export default class RegistrationPage extends BasePage {
     return actualErrorText;
   }
 
-  async clickAllMandatoryInputs() {
-    for (const input of await this.signUpInput.all()) {
-      await input.click();
-    }
-
-    await this.signUpInput.last().blur();
-  }
-
-  async checkCSS(item, property, value) {
-    await expect(item).toHaveCSS(property, value);
-  }
-
-  async fillTextAllInputs(text) {
+  async fill(data) {
     const count = await this.signUpInput.count();
     for (let i = 0; i < count; i++) {
-      await this.signUpInput.nth(i).fill(text[i]);
+      await this.signUpInput.nth(i).fill(data[i]);
     }
 
     await this.signUpInput.last().blur();
