@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:smoke": "npx playwright test -c playwright.config.smoke.js",
+    "test:regression": "npx playwright test -c playwright.config.regression.js",
     "test:ui": "npx playwright test --ui",
     "report": "npx playwright show-report"
   },
@@ -16,5 +18,8 @@
     "@faker-js/faker": "^8.2.0",
     "@playwright/test": "^1.39.0",
     "@types/node": "^20.8.10"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
   }
 }
