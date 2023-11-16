@@ -23,6 +23,7 @@ const config = defineConfig({
     "tests/auth/*.spec.js",
   ],
   /* Timeout for every tests */
+  grep: /@regression/,
   timeout: 30000,
   /* Expect assertion */
   expect: {

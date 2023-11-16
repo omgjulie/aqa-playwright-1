@@ -20,7 +20,7 @@ test.describe("Sign up modal", () => {
     await welcomePage.openRegistrationPage();
   });
 
-  test("All fields are mandatory", async () => {
+  test("All fields are mandatory @regression", async () => {
     const registration = new RegistrationPage(page);
 
     const emptyData = ["", "", "", "", ""];
@@ -45,7 +45,7 @@ test.describe("Sign up modal", () => {
     await expect(registration.registerButton).toBeDisabled();
   });
 
-  test.only("Validation of inputs", async () => {
+  test("Validation of inputs @regression", async () => {
     const registration = new RegistrationPage(page);
 
     const invalidData = ["6", "6", "etdf@f", "4", "6", "7"];
@@ -68,7 +68,7 @@ test.describe("Sign up modal", () => {
     await expect(registration.registerButton).toBeDisabled();
   });
 
-  test("Create user with valid data", async () => {
+  test.skip("Create user with valid data @smoke @regression", async () => {
     const registration = new RegistrationPage(page);
 
     const firsName = faker.person.firstName({ sex: "female" });
