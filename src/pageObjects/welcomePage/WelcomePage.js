@@ -5,6 +5,8 @@ import SignInPopup from "./components/SignInPopup.js";
 export default class WelcomePage extends BasePage {
   constructor(page) {
     super(page, "/", page.locator("button", { hasText: "Guest log in" }));
+
+    this.signInButton = this._page.locator(".header_signin");
   }
   async openRegistrationPage() {
     const signUpButton = this._page.locator("button.hero-descriptor_btn");
@@ -18,8 +20,7 @@ export default class WelcomePage extends BasePage {
   }
 
   async openSignInPopup() {
-    const signInButton = this._page.locator(".header_signin");
-    await signInButton.click();
+    await this.signInButton.click();
     return new SignInPopup(this._page);
   }
 }
