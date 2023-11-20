@@ -1,5 +1,6 @@
 import BasePage from "../BasePage.js";
 import { expect } from "@playwright/test";
+import SignInPopup from "./components/SignInPopup.js";
 
 export default class WelcomePage extends BasePage {
   constructor(page) {
@@ -14,5 +15,11 @@ export default class WelcomePage extends BasePage {
       signUpModal,
       "Sign up modal page should be visible",
     ).toBeVisible();
+  }
+
+  async openSignInPopup() {
+    const signInButton = this._page.locator(".header_signin");
+    await signInButton.click();
+    return new SignInPopup(this._page);
   }
 }
