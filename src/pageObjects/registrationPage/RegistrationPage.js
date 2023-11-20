@@ -5,13 +5,9 @@ export default class RegistrationPage extends BasePage {
   constructor(page) {
     super(page, "/", page.locator("app-signup-modal"));
 
-    this.nameInput = this._container.locator("input#signupName");
-    this.lastNameInput = this._container.locator("input#signupLastName");
     this.emailInput = this._container.locator("input#signupEmail");
     this.passwordInput = this._container.locator("input#signupPassword");
-    this.repeatPasswordInput = this._container.locator(
-      "input#signupRepeatPassword",
-    );
+
     this.registerButton = this._container.locator(
       ".modal-footer button.btn-primary",
     );

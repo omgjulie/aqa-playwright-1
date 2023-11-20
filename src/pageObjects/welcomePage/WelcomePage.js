@@ -1,9 +1,12 @@
 import BasePage from "../BasePage.js";
 import { expect } from "@playwright/test";
+import SignInPopup from "./components/SignInPopup.js";
 
 export default class WelcomePage extends BasePage {
   constructor(page) {
     super(page, "/", page.locator("button", { hasText: "Guest log in" }));
+
+    this.signInButton = this._page.locator(".header_signin");
   }
   async openRegistrationPage() {
     const signUpButton = this._page.locator("button.hero-descriptor_btn");
@@ -14,5 +17,10 @@ export default class WelcomePage extends BasePage {
       signUpModal,
       "Sign up modal page should be visible",
     ).toBeVisible();
+  }
+
+  async openSignInPopup() {
+    await this.signInButton.click();
+    return new SignInPopup(this._page);
   }
 }
