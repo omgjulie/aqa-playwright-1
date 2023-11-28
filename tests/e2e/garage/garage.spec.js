@@ -1,4 +1,4 @@
-import { test } from "../../../src/fixtures/userGaragePage.fixture.js";
+import { test } from "../../../src/fixtures/custom.fixture.js";
 import { expect } from "@playwright/test";
 import GaragePage from "../../../src/pageObjects/garagePage/GaragePage.js";
 

@@ -1,8 +1,8 @@
-import { test } from "../../../src/fixtures/userAPIRequest.fixture.js";
+import { test } from "../../../src/fixtures/custom.fixture.js";
 import { expect } from "@playwright/test";
 import { PORSCHE_CAR } from "./fixtures/cars.js";
 
-test.describe.only("API", () => {
+test.describe("API", () => {
   test("should create new car", async ({ userAPIRequest }) => {
     const requestBody = {
       carBrandId: PORSCHE_CAR.carBrandId,
