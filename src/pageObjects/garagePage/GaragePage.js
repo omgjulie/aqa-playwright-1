@@ -5,7 +5,7 @@ export default class GaragePage extends BasePage {
     super(
       page,
       "/panel/garage",
-      page.locator("button#userNavDropdown", { hasText: " My profile " }),
+      page.locator("button", { hasText: "Add car" }),
     );
     this.title = page.locator(".panel-page_heading h1");
   }

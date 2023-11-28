@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { faker } from "@faker-js/faker";
-import WelcomePage from "../../src/pageObjects/welcomePage/WelcomePage.js";
-import RegistrationPage from "../../src/pageObjects/registrationPage/RegistrationPage.js";
+import WelcomePage from "../../../src/pageObjects/welcomePage/WelcomePage.js";
+import RegistrationPage from "../../../src/pageObjects/registrationPage/RegistrationPage.js";
 
 test.describe("Sign up modal", () => {
   let page;
