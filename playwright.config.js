@@ -62,6 +62,10 @@ const config = defineConfig({
       use: { ...devices["Desktop Chrome"] },
       dependencies: ["setup"],
     },
+    {
+      name: "api",
+      testMatch: "tests/api/**/cars-axios.spec.js",
+    },
 
     // {
     //   name: "webkit",

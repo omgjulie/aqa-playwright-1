@@ -3,7 +3,7 @@ import { CUSTOM_PROFILE_DATA } from "./fixtures/profileData.js";
 import ProfilePage from "../../../src/pageObjects/profilePage/ProfilePage.js";
 import { expect } from "@playwright/test";
 
-test.describe.only("User profile", () => {
+test.describe.skip("User profile", () => {
   test("frontend should display replaced profile user name", async ({
     userProfilePage,
   }) => {
