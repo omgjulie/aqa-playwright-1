@@ -238,112 +238,80 @@ test.describe("API Controllers - GET", () => {
 });
 
 test.describe("API Controller - PUT", () => {
+  let responseBody;
+  let carId;
+
   test.beforeEach(async () => {
     client = await APIClient.authenticate(userCredentials);
+
+    const response = await client.cars.createNewCar(createRequestBody);
+    responseBody = response.data.data;
+    carId = responseBody.id;
   });
 
   test("existing car should be updated", async () => {
-    let responseBody;
-    let carId;
+    const updatedData = {
+      carBrandId: 3,
+      carModelId: 15,
+      mileage: 4646,
+    };
 
-    await test.step("create new car", async () => {
-      const response = await client.cars.createNewCar(createRequestBody);
+    const response = await client.cars.editCarData(updatedData, carId);
+    const body = response.data;
 
-      responseBody = response.data.data;
-      carId = responseBody.id;
-    });
+    const expectedBody = {
+      brand: body.data.brand,
+      carBrandId: updatedData.carBrandId,
+      carCreatedAt: expect.any(String),
+      carModelId: updatedData.carModelId,
+      id: responseBody.id,
+      initialMileage: responseBody.initialMileage,
+      logo: body.data.logo,
+      mileage: updatedData.mileage,
+      model: body.data.model,
+      updatedMileageAt: expect.any(String),
+    };
 
-    await test.step("return updated car info", async () => {
-      const updatedData = {
-        carBrandId: 3,
-        carModelId: 15,
-        mileage: 4646,
-      };
-
-      const response = await client.cars.editCarData(updatedData, carId);
-      const body = response.data;
-
-      const expectedBody = {
-        brand: body.data.brand,
-        carBrandId: updatedData.carBrandId,
-        carCreatedAt: expect.any(String),
-        carModelId: updatedData.carModelId,
-        id: responseBody.id,
-        initialMileage: responseBody.initialMileage,
-        logo: body.data.logo,
-        mileage: updatedData.mileage,
-        model: body.data.model,
-        updatedMileageAt: expect.any(String),
-      };
-
-      expect(response.status, "Response status code should be 200").toBe(200);
-      expect(body.data).toMatchObject(expectedBody);
-    });
+    expect(response.status, "Response status code should be 200").toBe(200);
+    expect(body.data).toMatchObject(expectedBody);
   });
 
   test("carBrandId, carModelId, mileage fields are required for updating ", async () => {
-    let responseBody;
-    let carId;
+    const response = await client.cars.editCarData({}, carId);
+    const body = response.data;
 
-    await test.step("create new car", async () => {
-      const response = await client.cars.createNewCar(createRequestBody);
-
-      responseBody = response.data.data;
-      carId = responseBody.id;
-    });
-
-    await test.step("return error message", async () => {
-      const response = await client.cars.editCarData({}, carId);
-      const body = response.data;
-
-      expect(response.status, "Response status code should be 400").toBe(400);
-      expect(body.message).toBe(
-        "Unacceptable fields only or empty body are not allowed",
-      );
-    });
+    expect(response.status, "Response status code should be 400").toBe(400);
+    expect(body.message).toBe(
+      "Unacceptable fields only or empty body are not allowed",
+    );
   });
 });
 
 test.describe("API Controller - DELETE", () => {
+  let responseBody;
+  let carId;
+
   test.beforeEach(async () => {
     client = await APIClient.authenticate(userCredentials);
+
+    const response = await client.cars.createNewCar(createRequestBody);
+    responseBody = response.data.data;
+    carId = responseBody.id;
   });
 
   test("should delete existing car", async () => {
-    let responseBody;
-    let carId;
+    const response = await client.cars.deleteCar(carId);
+    const body = response.data;
 
-    await test.step("create new car", async () => {
-      const response = await client.cars.createNewCar(createRequestBody);
+    const expectedBody = {
+      carId: responseBody.id,
+    };
 
-      responseBody = response.data.data;
-      carId = responseBody.id;
-    });
-
-    await test.step("delete created car", async () => {
-      const response = await client.cars.deleteCar(carId);
-      const body = response.data;
-
-      const expectedBody = {
-        carId: responseBody.id,
-      };
-
-      expect(response.status, "Response status code should be 200").toBe(200);
-      expect(body.data).toEqual(expectedBody);
-    });
+    expect(response.status, "Response status code should be 200").toBe(200);
+    expect(body.data).toEqual(expectedBody);
   });
 
   test("logged out user can't delete the car", async () => {
-    let responseBody;
-    let carId;
-
-    await test.step("create new car", async () => {
-      const response = await client.cars.createNewCar(createRequestBody);
-
-      responseBody = response.data.data;
-      carId = responseBody.id;
-    });
-
     await test.step("delete created car", async () => {
       client = await APIClient.authenticate({});
       const response = await client.cars.deleteCar(carId);
