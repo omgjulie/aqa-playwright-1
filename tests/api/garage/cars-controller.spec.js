@@ -95,6 +95,7 @@ test.describe("API Controller - POST", () => {
 test.describe("API Controllers - GET", () => {
   test.beforeEach(async () => {
     client = await APIClient.authenticate(userCredentials);
+    await client.cars.createNewCar(createRequestBody);
   });
 
   test("should return user's cars", async () => {
