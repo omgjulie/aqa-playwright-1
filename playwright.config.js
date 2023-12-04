@@ -64,7 +64,8 @@ const config = defineConfig({
     },
     {
       name: "api",
-      testMatch: "tests/api/**/cars-axios.spec.js",
+      testMatch: "tests/api/garage/cars-controller.spec.js",
+      fullyParallel: true,
     },
 
     // {
