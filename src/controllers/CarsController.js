@@ -5,9 +5,9 @@ export default class CarsController extends BaseController {
 
   #GET_CARS_PATH = "/cars";
   #GET_CAR_BRANDS_PATH = "/cars/brands";
-  #GET_CAR_BRAND_ID_PATH = `cars/brands/`;
+  #GET_CAR_BRAND_ID_PATH = `/cars/brands/`;
   #GET_CAR_MODELS_PATH = "/cars/models";
-  #GET_CAR_MODEL_ID_PATH = `cars/models/`;
+  #GET_CAR_MODEL_ID_PATH = `/cars/models/`;
   #GET_USER_CAR_ID_PATH = `/cars/`;
 
   #EDIT_CAR_PATH = `/cars/`;
