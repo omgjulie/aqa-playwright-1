@@ -54,7 +54,26 @@ test.describe("API Controllers - GET", () => {
   test("should return user's cars", async () => {
     const response = await client.cars.getUserCars();
 
+    const body = response.data;
+
+    const expectedBody = {
+      brand: responseBody.brand,
+      carBrandId: responseBody.carBrandId,
+      carCreatedAt: expect.any(String),
+      carModelId: responseBody.carModelId,
+      id: responseBody.id,
+      initialMileage: responseBody.initialMileage,
+      logo: responseBody.logo,
+      mileage: responseBody.mileage,
+      model: responseBody.model,
+      updatedMileageAt: expect.any(String),
+    };
+
     expect(response.status, "Response status code should be 200").toEqual(200);
+
+    for (const car of body.data) {
+      expect(car).toMatchObject(expectedBody);
+    }
   });
 
   test("user is not logged in", async () => {

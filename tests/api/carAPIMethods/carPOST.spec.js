@@ -42,12 +42,12 @@ test.describe("API Controller - POST", () => {
   test("should create new car", async () => {
     const expectedBody = {
       id: expect.any(Number),
-      carBrandId: PORSCHE_CAR.carBrandId,
+      carBrandId: createRequestBody.carBrandId,
       carCreatedAt: expect.any(String),
-      carModelId: PORSCHE_CAR.carModelId,
+      carModelId: createRequestBody.carModelId,
       initialMileage: expect.any(Number),
       updatedMileageAt: expect.any(String),
-      mileage: PORSCHE_CAR.mileage,
+      mileage: createRequestBody.mileage,
       brand: expect.any(String),
       model: expect.any(String),
       logo: expect.any(String),
