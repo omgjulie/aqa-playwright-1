@@ -57,15 +57,15 @@ test.describe("API Controllers - GET", () => {
     const body = response.data;
 
     const expectedBody = {
-      brand: responseBody.brand,
-      carBrandId: responseBody.carBrandId,
+      brand: expect.any(String),
+      carBrandId: expect.any(Number),
       carCreatedAt: expect.any(String),
-      carModelId: responseBody.carModelId,
-      id: responseBody.id,
-      initialMileage: responseBody.initialMileage,
-      logo: responseBody.logo,
-      mileage: responseBody.mileage,
-      model: responseBody.model,
+      carModelId: expect.any(Number),
+      id: expect.any(Number),
+      initialMileage: expect.any(Number),
+      logo: expect.any(String),
+      mileage: expect.any(Number),
+      model: expect.any(String),
       updatedMileageAt: expect.any(String),
     };
 

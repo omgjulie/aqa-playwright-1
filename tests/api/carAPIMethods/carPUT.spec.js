@@ -3,6 +3,8 @@ import { PORSCHE_CAR } from "../garage/fixtures/cars.js";
 import { test } from "../../../src/fixtures/custom.fixture.js";
 import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";
+import { VALID_BRANDS_RESPONSE_BODY } from "../../../src/data/dict/brands.js";
+import { VALID_BRAND_MODELS } from "../../../src/data/dict/models.js";
 
 test.describe("API Controller - PUT", () => {
   const userCredentials = {
@@ -59,16 +61,23 @@ test.describe("API Controller - PUT", () => {
     const response = await client.cars.editCarData(updatedData, carId);
     const body = response.data;
 
+    const brand = VALID_BRANDS_RESPONSE_BODY.data.find(
+      (brand) => brand.id === updatedData.carBrandId,
+    );
+    const model = VALID_BRAND_MODELS.data.find(
+      (model) => model.id === updatedData.carModelId,
+    );
+
     const expectedBody = {
-      brand: body.data.brand,
+      brand: brand.title,
       carBrandId: updatedData.carBrandId,
       carCreatedAt: expect.any(String),
       carModelId: updatedData.carModelId,
       id: responseBody.id,
       initialMileage: responseBody.initialMileage,
-      logo: body.data.logo,
+      logo: brand.logoFilename,
       mileage: updatedData.mileage,
-      model: body.data.model,
+      model: model.title,
       updatedMileageAt: expect.any(String),
     };
 
