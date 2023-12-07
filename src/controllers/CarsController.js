@@ -37,7 +37,7 @@ export default class CarsController extends BaseController {
     return this._client.get(this.#GET_CAR_BRAND_ID_PATH + carBrandId);
   }
 
-  async getCarModels(path) {
+  async getCarModels() {
     return this._client.get(this.#GET_CAR_MODELS_PATH);
   }
 
