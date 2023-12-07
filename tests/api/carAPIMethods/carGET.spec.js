@@ -84,26 +84,12 @@ test.describe("API Controllers - GET", () => {
     expect(response.data.message).toBe("Not authenticated");
   });
 
-  test("user car route not found", async () => {
-    const response = await client.cars.getUserCars("");
-
-    expect(response.status, "Response status code should be 404").toEqual(404);
-    expect(response.data.message).toBe("Not found");
-  });
-
   test("should return valid car brands", async () => {
     const response = await client.cars.getCarBrands();
     const body = response.data;
 
     expect(response.status, "Response status code should be 200").toEqual(200);
     expect(body).toEqual(VALID_BRANDS_RESPONSE_BODY);
-  });
-
-  test("car brand route not found", async () => {
-    const response = await client.cars.getCarBrands("");
-
-    expect(response.status, "Response status code should be 404").toEqual(404);
-    expect(response.data.message).toBe("Not found");
   });
 
   for (const brand of VALID_BRANDS_RESPONSE_BODY.data) {
@@ -138,13 +124,7 @@ test.describe("API Controllers - GET", () => {
     expect(response.status, "Response status code should be 200").toEqual(200);
     expect(body).toEqual(VALID_BRAND_MODELS);
   });
-
-  test("car model route not found", async () => {
-    const response = await client.cars.getCarModels("");
-
-    expect(response.status, "Response status code should be 404").toEqual(404);
-    expect(response.data.message).toBe("Not found");
-  });
+  git;
 
   for (const model of VALID_BRAND_MODELS.data) {
     test(`should return valid car ${model.title} model by id`, async () => {

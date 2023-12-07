@@ -25,17 +25,11 @@ export default class CarsController extends BaseController {
     });
   }
 
-  async getUserCars(path) {
-    if (path != null) {
-      return this._client.get(path);
-    }
+  async getUserCars() {
     return this._client.get(this.#GET_CARS_PATH);
   }
 
-  async getCarBrands(path) {
-    if (path != null) {
-      return this._client.get(path);
-    }
+  async getCarBrands() {
     return this._client.get(this.#GET_CAR_BRANDS_PATH);
   }
 
@@ -44,9 +38,6 @@ export default class CarsController extends BaseController {
   }
 
   async getCarModels(path) {
-    if (path != null) {
-      return this._client.get(path);
-    }
     return this._client.get(this.#GET_CAR_MODELS_PATH);
   }
 
