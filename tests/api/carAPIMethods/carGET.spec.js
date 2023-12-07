@@ -106,23 +106,21 @@ test.describe("API Controllers - GET", () => {
     expect(response.data.message).toBe("Not found");
   });
 
-  test("should return valid car brands by id", async () => {
-    const carBrandId = 2;
-    let carBrandData;
+  for (const brand of VALID_BRANDS_RESPONSE_BODY.data) {
+    test(`should return valid car ${brand.title} by id`, async () => {
+      const carBrandId = brand.id;
+      const carBrandData = brand;
 
-    const response = await client.cars.getCarBrandId(carBrandId);
-    const body = response.data;
+      const response = await client.cars.getCarBrandId(carBrandId);
+      const body = response.data;
 
-    expect(response.status, "Response status code should be 200").toEqual(200);
+      expect(response.status, "Response status code should be 200").toEqual(
+        200,
+      );
 
-    for (const brand of VALID_BRANDS_RESPONSE_BODY.data) {
-      if (brand.id === carBrandId) {
-        carBrandData = brand;
-      }
-    }
-
-    expect(body.data).toEqual(carBrandData);
-  });
+      expect(body.data).toEqual(carBrandData);
+    });
+  }
 
   test("No car brands found with unexciting id", async () => {
     const invalidId = VALID_BRANDS_RESPONSE_BODY.data.length + 1;
@@ -148,23 +146,21 @@ test.describe("API Controllers - GET", () => {
     expect(response.data.message).toBe("Not found");
   });
 
-  test("should return valid car brand model by id", async () => {
-    const carModelId = 2;
-    let carModelData;
+  for (const model of VALID_BRAND_MODELS.data) {
+    test(`should return valid car ${model.title} model by id`, async () => {
+      const carModelId = model.id;
+      const carModelData = model;
 
-    const response = await client.cars.getCarModelId(carModelId);
-    const body = response.data;
+      const response = await client.cars.getCarModelId(carModelId);
+      const body = response.data;
 
-    expect(response.status, "Response status code should be 200").toEqual(200);
+      expect(response.status, "Response status code should be 200").toEqual(
+        200,
+      );
 
-    for (const brand of VALID_BRAND_MODELS.data) {
-      if (brand.id === carModelId) {
-        carModelData = brand;
-      }
-    }
-
-    expect(body.data).toEqual(carModelData);
-  });
+      expect(body.data).toEqual(carModelData);
+    });
+  }
 
   test("No car brand model found with unexciting id", async () => {
     const invalidId = VALID_BRAND_MODELS.data.length + 1;
