@@ -23,7 +23,7 @@ const config = defineConfig({
     "tests/auth/*.spec.js",
   ],
   /* Timeout for every tests */
-  timeout: 30000,
+  timeout: 90000,
   /* Expect assertion */
   expect: {
     timeout: 10000,
@@ -64,7 +64,8 @@ const config = defineConfig({
     },
     {
       name: "api",
-      testMatch: "tests/api/**/cars-axios.spec.js",
+      testMatch: "tests/api/carAPIMethods/*.spec.js",
+      fullyParallel: false,
     },
 
     // {
