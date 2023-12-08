@@ -124,7 +124,6 @@ test.describe("API Controllers - GET", () => {
     expect(response.status, "Response status code should be 200").toEqual(200);
     expect(body).toEqual(VALID_BRAND_MODELS);
   });
-  git;
 
   for (const model of VALID_BRAND_MODELS.data) {
     test(`should return valid car ${model.title} model by id`, async () => {

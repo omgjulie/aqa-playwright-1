@@ -64,7 +64,7 @@ const config = defineConfig({
     },
     {
       name: "api",
-      testMatch: "tests/api/carAPIMethods/*.spec.js",
+      testMatch: "tests/api/data/**/*.spec.js",
       fullyParallel: false,
     },
 
