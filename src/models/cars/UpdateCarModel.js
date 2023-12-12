@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { VALID_BRANDS_RESPONSE_BODY } from "../../data/dict/brands.js";
 import { VALID_BRAND_MODELS } from "../../data/dict/models.js";
 
-export default class CreateCarModel {
+export default class UpdateCarModel {
   constructor(data) {
     this._data = data;
   }
@@ -11,7 +11,7 @@ export default class CreateCarModel {
     return structuredClone(this._data);
   }
 
-  static createRandomCarData() {
+  static createNewRandomCarData() {
     const brandId = faker.number.int({
       max: VALID_BRANDS_RESPONSE_BODY.data.length,
       min: 1,
@@ -20,10 +20,10 @@ export default class CreateCarModel {
       (model) => model.carBrandId === brandId,
     );
 
-    return new CreateCarModel({
+    return new UpdateCarModel({
       carBrandId: brandId,
       carModelId: modelId.id,
-      mileage: faker.number.int({ max: 500, min: 1 }),
+      mileage: faker.number.int({ max: 1000, min: 501 }),
     });
   }
 }
