@@ -4,6 +4,7 @@ import { USERS } from "../../../../src/data/dict/users.js";
 import CreateCarModel from "../../../../src/models/cars/CreateCarModel.js";
 import { VALID_BRAND_MODELS } from "../../../../src/data/dict/models.js";
 import { VALID_BRANDS_RESPONSE_BODY } from "../../../../src/data/dict/brands.js";
+import { faker } from "@faker-js/faker";
 
 test.describe("Cars", () => {
   const userCredentials = {
@@ -35,11 +36,19 @@ test.describe("Cars", () => {
   });
 
   test("should create car with valid data", async () => {
+    const brandIdRandom = faker.number.int({ max: 5, min: 1 });
+    const brandId = VALID_BRANDS_RESPONSE_BODY.data.find(
+      (brand) => brandIdRandom === brand.id,
+    );
+    const modelId = VALID_BRAND_MODELS.data.find(
+      (model) => model.carBrandId === brandId.id,
+    );
     const carModel = new CreateCarModel({
-      carBrandId: 1,
-      carModelId: 1,
-      mileage: 564,
+      carBrandId: brandIdRandom,
+      carModelId: modelId.id,
+      mileage: faker.number.int({ max: 10000, min: 1 }),
     });
+
     const brand = VALID_BRANDS_RESPONSE_BODY.data.find(
       (brand) => brand.id === carModel.carBrandId,
     );
