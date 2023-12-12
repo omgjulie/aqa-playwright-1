@@ -3,18 +3,13 @@ import { PORSCHE_CAR } from "../garage/fixtures/cars.js";
 import { test } from "../../../src/fixtures/custom.fixture.js";
 import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";
+import CreateCarModel from "../../../src/models/cars/CreateCarModel.js";
 
 test.describe("API Controller - DELETE", () => {
   const userCredentials = {
     email: USERS.YULIIA_AQA.email,
     password: USERS.YULIIA_AQA.password,
     remember: false,
-  };
-
-  const createRequestBody = {
-    carBrandId: PORSCHE_CAR.carBrandId,
-    carModelId: PORSCHE_CAR.carModelId,
-    mileage: PORSCHE_CAR.mileage,
   };
 
   let client;
@@ -26,7 +21,9 @@ test.describe("API Controller - DELETE", () => {
   test.beforeEach(async () => {
     client = await APIClient.authenticate(userCredentials);
 
-    const response = await client.cars.createNewCar(createRequestBody);
+    const carModel = CreateCarModel.createRandomCarData().extract();
+
+    const response = await client.cars.createNewCar(carModel);
 
     responseBody = response.data.data;
     carId = responseBody.id;

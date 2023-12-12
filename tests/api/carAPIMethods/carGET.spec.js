@@ -1,22 +1,16 @@
 import { USERS } from "../../../src/data/dict/users.js";
-import { PORSCHE_CAR } from "../garage/fixtures/cars.js";
 import { test } from "../../../src/fixtures/custom.fixture.js";
 import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";
 import { VALID_BRANDS_RESPONSE_BODY } from "../../../src/data/dict/brands.js";
 import { VALID_BRAND_MODELS } from "../../../src/data/dict/models.js";
+import CreateCarModel from "../../../src/models/cars/CreateCarModel.js";
 
 test.describe("API Controllers - GET", () => {
   const userCredentials = {
     email: USERS.YULIIA_AQA.email,
     password: USERS.YULIIA_AQA.password,
     remember: false,
-  };
-
-  const createRequestBody = {
-    carBrandId: PORSCHE_CAR.carBrandId,
-    carModelId: PORSCHE_CAR.carModelId,
-    mileage: PORSCHE_CAR.mileage,
   };
 
   let client;
@@ -28,7 +22,9 @@ test.describe("API Controllers - GET", () => {
   test.beforeEach(async () => {
     client = await APIClient.authenticate(userCredentials);
 
-    const response = await client.cars.createNewCar(createRequestBody);
+    const carModel = CreateCarModel.createRandomCarData().extract();
+
+    const response = await client.cars.createNewCar(carModel);
 
     responseBody = response.data.data;
     carId = responseBody.id;
@@ -36,7 +32,7 @@ test.describe("API Controllers - GET", () => {
     userCarIdList.push(carId);
   });
 
-  test.afterAll(async () => {
+  test.afterEach(async () => {
     client = await APIClient.authenticate(userCredentials);
 
     for (const id of userCarIdList) {
@@ -124,7 +120,6 @@ test.describe("API Controllers - GET", () => {
     expect(response.status, "Response status code should be 200").toEqual(200);
     expect(body).toEqual(VALID_BRAND_MODELS);
   });
-  git;
 
   for (const model of VALID_BRAND_MODELS.data) {
     test(`should return valid car ${model.title} model by id`, async () => {

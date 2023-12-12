@@ -5,18 +5,14 @@ import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";
 import { VALID_BRANDS_RESPONSE_BODY } from "../../../src/data/dict/brands.js";
 import { VALID_BRAND_MODELS } from "../../../src/data/dict/models.js";
+import CreateCarModel from "../../../src/models/cars/CreateCarModel.js";
+import UpdateCarModel from "../../../src/models/cars/UpdateCarModel.js";
 
 test.describe("API Controller - PUT", () => {
   const userCredentials = {
     email: USERS.YULIIA_AQA.email,
     password: USERS.YULIIA_AQA.password,
     remember: false,
-  };
-
-  const createRequestBody = {
-    carBrandId: PORSCHE_CAR.carBrandId,
-    carModelId: PORSCHE_CAR.carModelId,
-    mileage: PORSCHE_CAR.mileage,
   };
 
   let client;
@@ -28,7 +24,8 @@ test.describe("API Controller - PUT", () => {
   test.beforeEach(async () => {
     client = await APIClient.authenticate(userCredentials);
 
-    const response = await client.cars.createNewCar(createRequestBody);
+    const carModel = CreateCarModel.createRandomCarData().extract();
+    const response = await client.cars.createNewCar(carModel);
 
     responseBody = response.data.data;
     carId = responseBody.id;
@@ -52,11 +49,7 @@ test.describe("API Controller - PUT", () => {
   });
 
   test("existing car should be updated", async () => {
-    const updatedData = {
-      carBrandId: 3,
-      carModelId: 15,
-      mileage: 4646,
-    };
+    const updatedData = UpdateCarModel.createNewRandomCarData().extract();
 
     const response = await client.cars.editCarData(updatedData, carId);
     const body = response.data;
@@ -86,11 +79,9 @@ test.describe("API Controller - PUT", () => {
   });
 
   test("logged out user can't delete the car", async () => {
+    const updatedData = UpdateCarModel.createNewRandomCarData().extract();
     client = await APIClient.authenticate({});
-    const response = await client.cars.editCarData(
-      { carBrandId: 4, carModelId: 17, mileage: 453 },
-      carId,
-    );
+    const response = await client.cars.editCarData(updatedData, carId);
     const body = response.data;
 
     expect(response.status, "Response status code should be 401").toBe(401);

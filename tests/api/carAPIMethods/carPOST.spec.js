@@ -1,20 +1,16 @@
 import { USERS } from "../../../src/data/dict/users.js";
-import { PORSCHE_CAR } from "../garage/fixtures/cars.js";
 import { test } from "../../../src/fixtures/custom.fixture.js";
 import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";
+import CreateCarModel from "../../../src/models/cars/CreateCarModel.js";
+import { VALID_BRANDS_RESPONSE_BODY } from "../../../src/data/dict/brands.js";
+import { VALID_BRAND_MODELS } from "../../../src/data/dict/models.js";
 
 test.describe("API Controller - POST", () => {
   const userCredentials = {
     email: USERS.YULIIA_AQA.email,
     password: USERS.YULIIA_AQA.password,
     remember: false,
-  };
-
-  const createRequestBody = {
-    carBrandId: PORSCHE_CAR.carBrandId,
-    carModelId: PORSCHE_CAR.carModelId,
-    mileage: PORSCHE_CAR.mileage,
   };
 
   let client;
@@ -39,31 +35,35 @@ test.describe("API Controller - POST", () => {
     }
   });
 
-  test("should create new car", async () => {
-    const expectedBody = {
-      id: expect.any(Number),
-      carBrandId: createRequestBody.carBrandId,
-      carCreatedAt: expect.any(String),
-      carModelId: createRequestBody.carModelId,
-      initialMileage: expect.any(Number),
-      updatedMileageAt: expect.any(String),
-      mileage: createRequestBody.mileage,
-      brand: expect.any(String),
-      model: expect.any(String),
-      logo: expect.any(String),
-    };
+  test("should create car with valid data", async () => {
+    const carModel = CreateCarModel.createRandomCarData().extract();
 
-    const response = await client.cars.createNewCar(createRequestBody);
+    const brand = VALID_BRANDS_RESPONSE_BODY.data.find(
+      (brand) => brand.id === carModel.carBrandId,
+    );
+    const model = VALID_BRAND_MODELS.data.find(
+      (model) => model.id === carModel.carModelId,
+    );
+
+    const response = await client.cars.createNewCar(carModel);
 
     const body = response.data;
-
     userCarIdList.push(body.data.id);
 
-    expect(
-      body.data,
-      "Response body should contain the data from request body",
-    ).toEqual(expectedBody);
+    const expectedBody = {
+      ...carModel,
+      id: expect.any(Number),
+      carCreatedAt: expect.any(String),
+      updatedMileageAt: expect.any(String),
+      initialMileage: carModel.mileage,
+      brand: brand.title,
+      model: model.title,
+      logo: brand.logoFilename,
+    };
 
+    expect(response.data.data, "Returned car object should be valid").toEqual(
+      expectedBody,
+    );
     expect(response.status, "Response status code should be 201").toEqual(201);
   });
 
