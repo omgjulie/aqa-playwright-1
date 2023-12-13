@@ -1,9 +1,7 @@
-#version of docker compose
 version: '2'
-#services we launch
-services:
-    auto-tests:
-      container_name: "automated-tests"
-      build:
-        context: .
 
+services:
+  auto-tests:
+    container_name: "automated-test"
+    build:
+      context: .
