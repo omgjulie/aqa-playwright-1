@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  auto-tests:
+    container_name: "automated-test"
+    build:
+      context: .

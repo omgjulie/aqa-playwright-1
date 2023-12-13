@@ -1,5 +1,4 @@
 import { USERS } from "../../../src/data/dict/users.js";
-import { PORSCHE_CAR } from "../garage/fixtures/cars.js";
 import { test } from "../../../src/fixtures/custom.fixture.js";
 import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";
@@ -33,7 +32,7 @@ test.describe("API Controller - PUT", () => {
     userCarIdList.push(carId);
   });
 
-  test.afterAll(async () => {
+  test.afterEach(async () => {
     client = await APIClient.authenticate(userCredentials);
 
     for (const id of userCarIdList) {
