@@ -21,7 +21,7 @@ const config = defineConfig({
     "tests/example.spec.js",
     "tests-examples/**/*.spec.js",
     "tests/auth/*.spec.js",
-    "tests/api/carAPIMethods/carGET.spec.js",
+    "tests/api/carAPIMethods/**/*.spec.js",
   ],
   /* Timeout for every tests */
   timeout: 90000,
