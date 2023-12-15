@@ -73,7 +73,7 @@ test.describe("API Controller - PUT", () => {
       updatedMileageAt: expect.any(String),
     };
 
-    expect(response.status, "Response status code should be 200").toBe(201);
+    expect(response.status, "Response status code should be 200").toBe(200);
     expect(body.data).toMatchObject(expectedBody);
   });
 
