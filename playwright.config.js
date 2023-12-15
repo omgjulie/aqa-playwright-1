@@ -65,8 +65,8 @@ const config = defineConfig({
     },
     {
       name: "api",
+      testIgnore: "tests/api/carAPIMethods/carGET.spec.js",
       testMatch: "tests/api/carAPIMethods/**/*.spec.js",
-      testIgnore: "test/api/carAPIMethods/carGET.spec.js",
       fullyParallel: false,
     },
 

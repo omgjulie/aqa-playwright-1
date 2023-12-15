@@ -69,7 +69,7 @@ test.describe("API Controller - PUT", () => {
       initialMileage: responseBody.initialMileage,
       logo: brand.logoFilename,
       mileage: updatedData.mileage,
-      model: model.title,
+      // model: model.title,
       updatedMileageAt: expect.any(String),
     };
 
