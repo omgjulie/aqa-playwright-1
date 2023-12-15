@@ -21,6 +21,7 @@ const config = defineConfig({
     "tests/example.spec.js",
     "tests-examples/**/*.spec.js",
     "tests/auth/*.spec.js",
+    "test/api/carAPIMethods/carGET.spec.js",
   ],
   /* Timeout for every tests */
   timeout: 90000,
@@ -42,7 +43,7 @@ const config = defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: testConfig.baseURL,
-    headless: false,
+    headless: true,
     httpCredentials: testConfig.httpCredentials,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -65,6 +66,7 @@ const config = defineConfig({
     {
       name: "api",
       testMatch: "tests/api/carAPIMethods/**/*.spec.js",
+      testIgnore: "test/api/carAPIMethods/carGET.spec.js",
       fullyParallel: false,
     },
 

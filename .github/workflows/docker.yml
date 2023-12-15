@@ -2,7 +2,7 @@ name: "Automated tests"
 on: push
 
 jobs:
-  tests:
+  api-tests:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout to test repository"
@@ -22,3 +22,4 @@ jobs:
         with:
           name: test-report
           path: playwright-report/
+          retention-days: 3
