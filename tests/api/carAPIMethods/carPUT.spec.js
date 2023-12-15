@@ -69,11 +69,11 @@ test.describe("API Controller - PUT", () => {
       initialMileage: responseBody.initialMileage,
       logo: brand.logoFilename,
       mileage: updatedData.mileage,
-      // model: model.title,
+      model: model.title,
       updatedMileageAt: expect.any(String),
     };
 
-    expect(response.status, "Response status code should be 200").toBe(200);
+    expect(response.status, "Response status code should be 200").toBe(201);
     expect(body.data).toMatchObject(expectedBody);
   });
 
