@@ -23,7 +23,7 @@ test.describe("API", () => {
     await expect(
       response.status(),
       "Response status code should be 201",
-    ).toEqual(200);
+    ).toEqual(201);
   });
 
   test("empty body is not allowed", async ({ userAPIRequest }) => {
