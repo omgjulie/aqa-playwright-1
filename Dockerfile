@@ -9,4 +9,4 @@ RUN npm ci
 
 #ENTRYPOINT ["./docker-entrypoint.sh"]
 
-CMD ["npm", "run", "test:docker"]
+CMD ["npm", "run", "test:api"]
