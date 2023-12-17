@@ -23,8 +23,8 @@ jobs:
       - name: "Run tests"
         run: npm run test:github
         env:
-          HTTP_CREDENTIALS_USERNAME: ${{secrets.HTTP_CREDENTIALS_USERNAME}}
-          HTTP_CREDENTIALS_PASSWORD: ${{secrets.HTTP_CREDENTIALS_PASSWORD}}
+          HTTP_CREDENTIALS_USERNAME: ${{ secrets.HTTP_CREDENTIALS_USERNAME }}
+          HTTP_CREDENTIALS_PASSWORD: ${{ secrets.HTTP_CREDENTIALS_PASSWORD }}
       - name: "Upload artifacts"
         if: failure()
         uses: actions/upload-artifact@v4
