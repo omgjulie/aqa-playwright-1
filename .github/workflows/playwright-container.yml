@@ -21,7 +21,7 @@ jobs:
         run: |
           cp '.env.stage' '.env'
       - name: "Run tests"
-        run: npm run test:github
+        run: npm run test:docker
         env:
           HTTP_CREDENTIALS_USERNAME: ${{secrets.HTTP_CREDENTIALS_USERNAME}}
           HTTP_CREDENTIALS_PASSWORD: ${{secrets.HTTP_CREDENTIALS_PASSWORD}}
