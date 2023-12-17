@@ -1,21 +1,30 @@
-name: "Automated tests"
+name: "Automated tests with github container"
 on: push
 
 jobs:
-  gui-tests:
+  api-tests:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.39.0-jammy
     steps:
       - name: "Checkout to test repository"
         uses: actions/checkout@v4
         with:
           repository: ${{github.repository}}
           ref: ${{github.ref}}
+      - name: "Install node"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: "Install dependencies"
+        run: npm ci
       - name: "Copy environment variables"
         run: |
           cp '.env.stage' '.env'
       - name: "Run tests"
-        run: |
-          HTTP_CREDENTIALS_USERNAME=${{secrets.HTTP_CREDENTIALS_USERNAME}} HTTP_CREDENTIALS_PASSWORD=${{secrets.HTTP_CREDENTIALS_PASSWORD}} docker-compose up --exit-code-from auto-tests
+        run: npm run test:docker
+        env:
+          HTTP_CREDENTIALS_USERNAME: ${{secrets.HTTP_CREDENTIALS_USERNAME}}
+          HTTP_CREDENTIALS_PASSWORD: ${{secrets.HTTP_CREDENTIALS_PASSWORD}}
       - name: "Upload artifacts"
         if: failure()
         uses: actions/upload-artifact@v4

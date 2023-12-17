@@ -10,6 +10,7 @@
     "test:regression": "npx playwright test -c playwright.config.regression.js",
     "test:ui": "npx playwright test --ui",
     "test:docker": "npx playwright test -c playwright.config.docker.js",
+    "test:github": "npx playwright test -c playwright.config.github.js --project=api",
     "report": "npx playwright show-report"
   },
   "keywords": [],
