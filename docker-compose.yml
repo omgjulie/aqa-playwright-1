@@ -5,6 +5,7 @@ services:
     environment:
       HTTP_CREDENTIALS_USERNAME: ${HTTP_CREDENTIALS_USERNAME}
       HTTP_CREDENTIALS_PASSWORD: ${HTTP_CREDENTIALS_PASSWORD}
+      CI: 'true'
     container_name: "automated-test"
     build:
       context: .
