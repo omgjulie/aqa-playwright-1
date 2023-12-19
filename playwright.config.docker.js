@@ -21,7 +21,7 @@ const config = defineConfig({
     "tests/example.spec.js",
     "tests-examples/**/*.spec.js",
     "tests/auth/*.spec.js",
-    "tests/api/carAPIMethods/**/*.spec.js",
+    "tests/api/**/*.spec.js",
   ],
   /* Timeout for every tests */
   timeout: 90000,
@@ -68,7 +68,7 @@ const config = defineConfig({
     },
     {
       name: "api",
-      testMatch: "tests/api/carAPIMethods/**/*.spec.js",
+      testMatch: "tests/api/**/*.spec.js",
       fullyParallel: false,
     },
 
