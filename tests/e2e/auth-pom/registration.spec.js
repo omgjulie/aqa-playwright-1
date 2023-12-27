@@ -68,7 +68,7 @@ test.describe("Sign up modal", () => {
     await expect(registration.registerButton).toBeDisabled();
   });
 
-  test.skip("Create user with valid data @smoke @regression", async () => {
+  test("Create user with valid data @smoke @regression", async () => {
     const registration = new RegistrationPage(page);
 
     const firsName = faker.person.firstName({ sex: "female" });

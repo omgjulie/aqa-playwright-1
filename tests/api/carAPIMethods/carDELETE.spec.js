@@ -1,5 +1,4 @@
 import { USERS } from "../../../src/data/dict/users.js";
-import { PORSCHE_CAR } from "../garage/fixtures/cars.js";
 import { test } from "../../../src/fixtures/custom.fixture.js";
 import APIClient from "../../../src/client/APIClient.js";
 import { expect } from "@playwright/test";

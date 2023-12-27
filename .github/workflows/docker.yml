@@ -1,0 +1,25 @@
+name: "Automated tests"
+on: push
+
+jobs:
+  gui-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout to test repository"
+        uses: actions/checkout@v4
+        with:
+          repository: ${{github.repository}}
+          ref: ${{github.ref}}
+      - name: "Copy environment variables"
+        run: |
+          cp '.env.stage' '.env'
+      - name: "Run tests"
+        run: |
+          HTTP_CREDENTIALS_USERNAME=${{secrets.HTTP_CREDENTIALS_USERNAME}} HTTP_CREDENTIALS_PASSWORD=${{secrets.HTTP_CREDENTIALS_PASSWORD}} docker-compose up --exit-code-from auto-tests
+      - name: "Upload artifacts"
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: playwright-report/
+          retention-days: 3
